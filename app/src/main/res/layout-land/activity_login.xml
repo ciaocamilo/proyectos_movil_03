@@ -25,49 +25,50 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.096" />
+        app:layout_constraintVertical_bias="0.071" />
 
     <ImageView
         android:id="@+id/ivLogin"
         android:layout_width="323dp"
         android:layout_height="214dp"
+        android:src="@drawable/bird"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.073"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitleLogin"
-        app:layout_constraintVertical_bias="0.18"
-        android:src="@drawable/bird" />
+        app:layout_constraintVertical_bias="0.298" />
 
     <EditText
         android:id="@+id/etPersonName"
         android:layout_width="323dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/hint_name"
         android:inputType="textPersonName"
         android:text=""
-        android:hint="@string/hint_name"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivLogin"
-        app:layout_constraintVertical_bias="0.178" />
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toEndOf="@+id/ivLogin"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleLogin"
+        app:layout_constraintVertical_bias="0.13" />
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="323dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/hint_password"
         android:inputType="textPassword"
         android:textSize="25sp"
-        android:hint="@string/hint_password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toEndOf="@+id/ivLogin"
         app:layout_constraintTop_toBottomOf="@+id/etPersonName"
-        app:layout_constraintVertical_bias="0.076" />
+        app:layout_constraintVertical_bias="0.145" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -77,9 +78,9 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toEndOf="@+id/ivLogin"
         app:layout_constraintTop_toBottomOf="@+id/etPassword"
-        app:layout_constraintVertical_bias="0.276" />
+        app:layout_constraintVertical_bias="0.256" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
