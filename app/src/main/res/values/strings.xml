@@ -4,4 +4,5 @@
     <string name="hint_name">Escriba su nombre</string>
     <string name="hint_password">Escriba la contraseña</string>
     <string name="enter">Ingresar</string>
+    <string name="exit">Salir</string>
 </resources>
