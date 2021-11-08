@@ -16,12 +16,17 @@ public class MainActivity extends AppCompatActivity {
 
         String name = getIntent().getStringExtra("user");
 
-        Toast.makeText(this, "Bienvenido(a) " + name, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Bienvenido(a) " + name, Toast.LENGTH_LONG).show();
     }
 
     public void goToLogin(View view) {
         Intent intentLogin = new Intent(this, LoginActivity.class);
         startActivity(intentLogin);
+    }
+
+    public void goToCalculator(View view) {
+        Intent intentCalculator = new Intent(this, CalculatorActivity.class);
+        startActivity(intentCalculator);
     }
 
 }
