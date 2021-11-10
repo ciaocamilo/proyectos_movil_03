@@ -2,10 +2,13 @@ package com.misiontic.holamundo03;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.telephony.mbms.StreamingServiceInfo;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CalculatorActivity extends AppCompatActivity {
 
@@ -28,13 +31,27 @@ public class CalculatorActivity extends AppCompatActivity {
         etNumberThree = findViewById(R.id.etNumberThree);
         tvResult = findViewById(R.id.tvResult);
 
-        double numberOne = Double.parseDouble(etNumberOne.getText().toString());
-        double numberTwo = Double.parseDouble(etNumberTwo.getText().toString());
-        double numberThree = Double.parseDouble(etNumberThree.getText().toString());
+        String strNumberOne = etNumberOne.getText().toString();
+        String strNumberTwo = etNumberTwo.getText().toString();
+        String strNumberThree = etNumberThree.getText().toString();
 
-        double average = (numberOne + numberTwo + numberThree) / 3;
+        Resources res = getResources();
+        if (!strNumberOne.equals("") && !strNumberTwo.equals("") && !strNumberThree.equals("")) {
+            double numberOne = Double.parseDouble(strNumberOne);
+            double numberTwo = Double.parseDouble(strNumberTwo);
+            double numberThree = Double.parseDouble(strNumberThree);
 
-        tvResult.setText("Promedio = " + average);
+            double average = (numberOne + numberTwo + numberThree) / 3;
+            average = Math.round(average * 100.0) / 100.0;
+
+            String result = String.format(res.getString(R.string.avg_equals), String.valueOf(average));
+
+            tvResult.setText(result);
+        } else {
+            Toast.makeText(this, res.getString(R.string.warning_all_numbers), Toast.LENGTH_LONG).show();
+            tvResult.setText(R.string.avg_error);
+        }
+
 
     }
 
