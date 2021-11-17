@@ -34,4 +34,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intentPersonForm);
     }
 
+    public void goToContacts(View view) {
+        Intent intentContact = new Intent(this, ContactActivity.class);
+        startActivity(intentContact);
+    }
+
 }
