@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 public class OrderActivity extends AppCompatActivity {
@@ -21,11 +22,27 @@ public class OrderActivity extends AppCompatActivity {
                 realizarPedido();
             }
         });
-
     }
 
     public void realizarPedido() {
-        Toast.makeText(this, "Pedido Realizado", Toast.LENGTH_LONG).show();
+        CheckBox cbPollo = findViewById(R.id.cbPollo);
+        CheckBox cbSalami = findViewById(R.id.cbSalami);
+        CheckBox cbJamon = findViewById(R.id.cbJamon);
+
+        String strPedido = getString(R.string.strOrderBase);
+        // Pedido realizado con los siguientes ingredientes:
+
+        if (cbPollo.isChecked()) {
+            strPedido = strPedido.concat(" pollo ");
+        }
+        if (cbSalami.isChecked()) {
+            strPedido = strPedido.concat("salami ");
+        }
+        if (cbJamon.isChecked()) {
+            strPedido = strPedido.concat("jamón ");
+        }
+
+        Toast.makeText(this, strPedido, Toast.LENGTH_LONG).show();
     }
 
 }
