@@ -2,8 +2,11 @@ package com.misiontic.holamundo03;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -59,6 +62,7 @@ public class ContactListActivity extends AppCompatActivity {
                 // Toast.makeText(this, id + "-" + nombre + " " + apellidos, Toast.LENGTH_LONG).show();
 
                 Persona nuevoContacto = new Persona(nombre, apellidos, direccion, telefono, fecha_nacimiento, null);
+                nuevoContacto.setId(id);
                 contactList.add(nuevoContacto);
             } while (resultados.moveToNext());
 
@@ -67,12 +71,29 @@ public class ContactListActivity extends AppCompatActivity {
             listView.setAdapter(adapter);
             //
 
+            // Función al tocar
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    Persona seleccionado = (Persona) listView.getItemAtPosition(position);
+                    int idPerson = seleccionado.getId();
+                    goToContactUpdate(idPerson);
+                }
+            });
+            //
+
         } catch (Exception e) {
             Toast.makeText(this, "Error al realizar la consulta", Toast.LENGTH_SHORT).show();
         } finally {
             resultados.close();
         }
 
+    }
+
+    public void goToContactUpdate(int idPerson) {
+        Intent intentUpdate = new Intent(this, ContactUpdateActivity.class);
+        intentUpdate.putExtra("person", idPerson);
+        startActivity(intentUpdate);
     }
 
 }
