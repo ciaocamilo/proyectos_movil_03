@@ -1,5 +1,6 @@
 package com.misiontic.holamundo03.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -48,6 +49,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         return cu;
     }
 
+    public int deleteData(String tabla, String whereClause, String[] params) {
+        SQLiteDatabase db = getWritableDatabase();
+        int nRows = db.delete(tabla, whereClause, params);
+        return  nRows;
+    }
 
+    public int updateData(String tabla, ContentValues cv, String whereClause, String[] params) {
+        SQLiteDatabase db = getWritableDatabase();
+        int nRows = db.update(tabla, cv, whereClause, params);
+        return  nRows;
+    }
 
 }
