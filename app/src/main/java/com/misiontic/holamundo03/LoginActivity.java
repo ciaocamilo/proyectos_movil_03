@@ -42,4 +42,9 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intentMain);
     }
 
+    public void goToNewUser(View view) {
+        Intent newUserIntent = new Intent(this, NewUserActivity.class);
+        startActivity(newUserIntent);
+    }
+
 }
