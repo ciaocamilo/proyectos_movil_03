@@ -20,7 +20,7 @@ public class NewUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
 
-        MostrarUsuario();
+        // MostrarUsuario();
     }
 
     public void createUser(View view) {
@@ -45,6 +45,9 @@ public class NewUserActivity extends AppCompatActivity {
         */
     }
 
+
+
+    /*  Ejemplo */
     public void MostrarUsuario(){
         // Read from the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
