@@ -43,4 +43,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-database'
 
+    // Location
+    implementation 'com.google.android.gms:play-services-location:9.4.0'
+
 }
