@@ -14,4 +14,7 @@
     <item
         android:id="@+id/item_pedido"
         android:title="@string/orders" />
+    <item
+        android:id="@+id/item_location"
+        android:title="@string/location" />
 </menu>

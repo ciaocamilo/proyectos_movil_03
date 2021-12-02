@@ -38,9 +38,12 @@ public class MainActivity extends AppCompatActivity {
             goToPersonForm();
         } else if(id == R.id.item_pedido) {
             goToOrders();
+        } else if(id == R.id.item_location) {
+            goToLocation();
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 
     public void goToLogin(View view) {
@@ -73,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
     public void goToOrders() {
         Intent intentOrder = new Intent(this, OrderActivity.class);
         startActivity(intentOrder);
+    }
+
+    public void goToLocation() {
+        Intent intentLocation = new Intent(this, LocationActivity.class);
+        startActivity(intentLocation);
     }
 
 }

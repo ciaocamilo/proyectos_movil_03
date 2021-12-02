@@ -47,4 +47,8 @@
     <string name="cancel">Cancelar</string>
     <string name="user_name">Nombre usuario</string>
     <string name="password">Contraseña</string>
+    <string name="latitude_label">Latitud</string>
+    <string name="longitude_label">Longitud</string>
+    <string name="activity_label">Actividad</string>
+    <string name="location">Localización</string>
 </resources>
