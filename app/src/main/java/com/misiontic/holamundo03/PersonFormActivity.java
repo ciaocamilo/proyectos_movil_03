@@ -10,7 +10,9 @@ import androidx.activity.result.ActivityResultLauncher;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
@@ -20,6 +22,9 @@ import android.widget.Toast;
 
 
 import com.misiontic.holamundo03.db.MySQLiteHelper;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 public class PersonFormActivity extends AppCompatActivity {
 
@@ -71,6 +76,9 @@ public class PersonFormActivity extends AppCompatActivity {
         }
         //
 
+        // Test Save picture
+        // saveToGallery();
+
     }
 
     public void limpiarFormulario(View view) {
@@ -114,6 +122,36 @@ public class PersonFormActivity extends AppCompatActivity {
                     }
                 }
             });
+
+
+    private void saveToGallery() {
+        Bitmap bitmap = ((BitmapDrawable) ivPictureForm.getDrawable()).getBitmap();
+
+        FileOutputStream outputStream = null;
+        File file = Environment.getExternalStorageDirectory();
+        File dir = new File(file.getAbsolutePath() + "/Fotos_03" );
+        dir.mkdirs();
+
+        String filename = String.format("%d.png", System.currentTimeMillis());
+        File outfile = new File (dir, filename);
+
+        try {
+            outputStream = new FileOutputStream(outfile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        try {
+            outputStream.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }
