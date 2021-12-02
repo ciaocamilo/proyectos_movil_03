@@ -3,6 +3,7 @@ package com.misiontic.holamundo03.api;
 import android.os.AsyncTask;
 import android.util.JsonReader;
 
+import com.misiontic.holamundo03.model.Pedido;
 import com.misiontic.holamundo03.model.Producto;
 
 import java.io.InputStream;
@@ -92,5 +93,49 @@ public class ApiRequest {
         });
         return productoList;
     }
+
+
+    public void guardarPedido(Pedido nuevoPedido) {
+        AsyncTask.execute((new Runnable() {
+            @Override
+            public void run() {
+
+                URL pedidoEndpoint = null;
+
+                try {
+
+                    //Crear url
+                    pedidoEndpoint = new URL ("https://tienda-ca-api.herokuapp.com/api/nuevo-pedido");
+                    // Crear conexióm
+                    HttpsURLConnection conexion = (HttpsURLConnection) pedidoEndpoint.openConnection();
+
+                    // Lo nuevo
+                    conexion.setDoOutput(true);
+                    conexion.setRequestProperty("Content-Type", "application/json");
+                    conexion.setRequestMethod("POST");
+
+
+                    String requestBody = "{\"data\": " +
+                            "    {" +
+                            "    \"usuario\": \""+ nuevoPedido.getUsuario() +"\"," +
+                            "    \"producto\": \""+ nuevoPedido.getProducto() +"\"," +
+                            "    \"total\": " + nuevoPedido.getTotal() +"," +
+                            "    \"ubicacion\": \""+ nuevoPedido.getUbicacion() +"\"" +
+                            "    }" +
+                            "}";
+
+                    conexion.getOutputStream().write(requestBody.getBytes(StandardCharsets.UTF_8));
+                    conexion.getResponseCode();
+                    conexion.disconnect();
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }));
+    }
+
     
 }
