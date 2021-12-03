@@ -6,9 +6,12 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -77,7 +80,7 @@ public class PersonFormActivity extends AppCompatActivity {
         //
 
         // Test Save picture
-        // saveToGallery();
+        saveToGallery();
 
     }
 
@@ -125,31 +128,41 @@ public class PersonFormActivity extends AppCompatActivity {
 
 
     private void saveToGallery() {
-        Bitmap bitmap = ((BitmapDrawable) ivPictureForm.getDrawable()).getBitmap();
 
-        FileOutputStream outputStream = null;
-        File file = Environment.getExternalStorageDirectory();
-        File dir = new File(file.getAbsolutePath() + "/Fotos_03" );
-        dir.mkdirs();
+        // Check permisos
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Bitmap bitmap = ((BitmapDrawable) ivPictureForm.getDrawable()).getBitmap();
 
-        String filename = String.format("%d.png", System.currentTimeMillis());
-        File outfile = new File (dir, filename);
+                FileOutputStream outputStream = null;
+                File file = Environment.getExternalStorageDirectory();
+                File dir = new File(file.getAbsolutePath() + "/Fotos_03" );
+                dir.mkdirs();
 
-        try {
-            outputStream = new FileOutputStream(outfile);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-        try {
-            outputStream.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+                String filename = String.format("%d.png", System.currentTimeMillis());
+                File outfile = new File (dir, filename);
+
+                try {
+                    outputStream = new FileOutputStream(outfile);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+                try {
+                    outputStream.flush();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                try {
+                    outputStream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                ActivityCompat.requestPermissions(PersonFormActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 44);
+            }
+        } else {
+            ActivityCompat.requestPermissions(PersonFormActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 44);
         }
     }
 

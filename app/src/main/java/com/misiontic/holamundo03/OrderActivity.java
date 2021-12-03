@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.api.Api;
 import com.misiontic.holamundo03.api.ApiRequest;
+import com.misiontic.holamundo03.location.Location;
 import com.misiontic.holamundo03.model.Pedido;
 import com.misiontic.holamundo03.model.Producto;
 
@@ -20,6 +21,9 @@ import java.util.ArrayList;
 public class OrderActivity extends AppCompatActivity {
 
     private SharedPreferences settings; //SP
+
+    private String ubicacion;
+    Location coordenadas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,10 @@ public class OrderActivity extends AppCompatActivity {
         // TEST API
         ApiRequest api = new ApiRequest();
         ArrayList<Producto> listadoProductos = api.consultarProductos();
-        // Toast.makeText(this, "Hola", Toast.LENGTH_SHORT).show();
+
+        // Crea objeto de geolocalización
+        coordenadas = new Location(this, OrderActivity.this);
+
 
     }
 
@@ -66,8 +73,10 @@ public class OrderActivity extends AppCompatActivity {
             String usuario = settings.getString("usuario", "");
         //
 
+        ubicacion = coordenadas.getLatitud() + "," + coordenadas.getLongitud();
+
         // API
-        Pedido nuevoPedido = new Pedido(usuario, strPedido, 15000.0, "0,0");
+        Pedido nuevoPedido = new Pedido(usuario, strPedido, 15000.0, ubicacion);
         ApiRequest api = new ApiRequest();
         api.guardarPedido(nuevoPedido);
         //
