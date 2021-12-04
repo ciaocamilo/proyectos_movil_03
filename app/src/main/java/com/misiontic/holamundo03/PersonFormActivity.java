@@ -128,41 +128,41 @@ public class PersonFormActivity extends AppCompatActivity {
 
 
     private void saveToGallery() {
-
-        // Check permisos
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                Bitmap bitmap = ((BitmapDrawable) ivPictureForm.getDrawable()).getBitmap();
+            Bitmap bitmap = ((BitmapDrawable) ivPictureForm.getDrawable()).getBitmap();
 
-                FileOutputStream outputStream = null;
-                File file = Environment.getExternalStorageDirectory();
-                File dir = new File(file.getAbsolutePath() + "/Fotos_03" );
-                dir.mkdirs();
+            FileOutputStream outputStream = null;
 
-                String filename = String.format("%d.png", System.currentTimeMillis());
-                File outfile = new File (dir, filename);
+            /* File file = Environment.getExternalStorageDirectory();
+            File dir = new File(file.getAbsolutePath() + "/Fotos_03"); */
+            // Cambiar ´por
+            File dir = new File(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "Fotos_03");
 
-                try {
-                    outputStream = new FileOutputStream(outfile);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            dir.mkdirs();
+
+            String filename = String.format("%d.png", System.currentTimeMillis());
+            File outfile = new File (dir, filename);
+
+            try {
+                // Archivo guardado en
+                // \Android\data\com.misiontic.holamundo05\files\Pictures\Fotos_03
+                outputStream = new FileOutputStream(outfile);
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-                try {
-                    outputStream.flush();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                try {
-                    outputStream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else {
-                ActivityCompat.requestPermissions(PersonFormActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 44);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                outputStream.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                outputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } else {
-            ActivityCompat.requestPermissions(PersonFormActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 44);
+            ActivityCompat.requestPermissions(PersonFormActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 44);
         }
     }
 
